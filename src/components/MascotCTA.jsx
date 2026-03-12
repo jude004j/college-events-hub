@@ -29,17 +29,8 @@ const MascotCTA = () => {
         <section
             ref={sectionRef}
             id="register-cta"
-            style={{
-                background: 'linear-gradient(135deg, #0b1d3a 0%, #0f2a55 100%)',
-                padding: '120px 20px',
-                color: 'white',
-                width: '100%',
-                position: 'relative',
-                overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}
+            className="mascot-cta-section section-padding"
+            style={{ background: 'linear-gradient(135deg, #0b1d3a 0%, #0f2a55 100%)' }}
         >
             {/* Background Decorative Elements */}
             <div style={{
@@ -53,43 +44,17 @@ const MascotCTA = () => {
                 zIndex: 1,
                 pointerEvents: 'none'
             }}></div>
-            <div style={{
-                position: 'absolute',
-                bottom: '-10%',
-                left: '-5%',
-                width: '300px',
-                height: '300px',
-                background: 'radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%)',
-                filter: 'blur(50px)',
-                zIndex: 1,
-                pointerEvents: 'none'
-            }}></div>
-
+            
             <div
                 className="mascot-cta-content container"
                 style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '40px',
-                    position: 'relative',
-                    zIndex: 2,
                     opacity: isVisible ? 1 : 0,
                     transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
                     transition: 'opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)'
                 }}
             >
                 {/* Mascot Video Section */}
-                <div
-                    className="mascot-float"
-                    style={{
-                        flex: '1',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: 'relative'
-                    }}
-                >
+                <div className="mascot-video-container mascot-float">
                     {/* Glow effect behind mascot */}
                     <div style={{
                         position: 'absolute',
@@ -119,13 +84,7 @@ const MascotCTA = () => {
                 </div>
 
                 {/* Text Content Section */}
-                <div
-                    style={{
-                        flex: '1.2',
-                        textAlign: 'left',
-                        padding: '20px'
-                    }}
-                >
+                <div className="mascot-text-container">
                     <span style={{
                         color: '#38bdf8',
                         fontSize: '0.9rem',
@@ -139,22 +98,16 @@ const MascotCTA = () => {
                     </span>
                     <h2
                         style={{
-                            fontSize: 'clamp(2.5rem, 4vw, 3.8rem)',
-                            fontWeight: '800',
                             marginBottom: '24px',
                             color: 'white',
-                            lineHeight: '1.1',
-                            letterSpacing: '-0.02em'
                         }}
                     >
                         Join Our Next Event
                     </h2>
                     <p
                         style={{
-                            fontSize: '1.2rem',
                             color: '#cbd5e1',
                             marginBottom: '40px',
-                            lineHeight: '1.7',
                             maxWidth: '550px'
                         }}
                     >
@@ -165,59 +118,22 @@ const MascotCTA = () => {
                         className="cta-button"
                         style={{
                             display: 'inline-block',
-                            padding: '20px 48px',
+                            padding: '16px 40px',
                             background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
                             color: 'white',
                             textDecoration: 'none',
                             borderRadius: '100px',
-                            fontSize: '1.15rem',
+                            fontSize: '1.1rem',
                             fontWeight: '700',
-                            transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            transition: 'all 0.3s ease',
                             boxShadow: '0 12px 24px rgba(37, 99, 235, 0.4)',
                             border: 'none',
-                            cursor: 'pointer',
-                            position: 'relative',
-                            overflow: 'hidden'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'scale(1.08) translateY(-4px)';
-                            e.currentTarget.style.boxShadow = '0 20px 40px rgba(37, 99, 235, 0.6)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'scale(1) translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 12px 24px rgba(37, 99, 235, 0.4)';
                         }}
                     >
                         Register Now
                     </a>
                 </div>
             </div>
-
-            {/* In-component responsive adjustments */}
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @media (max-width: 991px) {
-                    .mascot-cta-content {
-                        flex-direction: column !important;
-                        text-align: center !important;
-                        gap: 60px !important;
-                    }
-                    .mascot-cta-content div {
-                        text-align: center !important;
-                    }
-                    .mascot-cta-content p {
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                }
-
-                /* Floating Animation handled via index.css class .mascot-float */
-                @keyframes mascotFloat {
-                  0% { transform: translateY(0px); }
-                  50% { transform: translateY(-20px); }
-                  100% { transform: translateY(0px); }
-                }
-            `}} />
         </section>
     );
 };

@@ -73,7 +73,7 @@ function PublicSite() {
     };
 
     return (
-        <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div className="app-container">
             <Header onGoHome={handleGoHome} headerData={siteData.header} />
 
             <main style={{ flex: 1 }}>
@@ -81,16 +81,16 @@ function PublicSite() {
                 <InnovationHubOverview data={siteData.innovationHubOverview} />
                 <Gallery />
                 <MascotCTA />
-                <section id="hubs-section" className="animate-zoom-in" style={{
-                    padding: 'clamp(60px, 10vh, 120px) 20px',
+
+                <section id="hubs-section" className="animate-zoom-in section-padding" style={{
                     backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/assets/explore-bg.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundAttachment: 'fixed',
                     width: '100%'
                 }}>
-                    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                        <h2 className="animate-fade-in-up" style={{ textAlign: 'center', marginBottom: '80px', color: 'white', fontSize: '2.8rem', fontWeight: 'bold' }}>
+                    <div className="container">
+                        <h2 className="animate-fade-in-up" style={{ textAlign: 'center', marginBottom: 'clamp(40px, 8vh, 80px)', color: 'white', fontWeight: 'bold' }}>
                             {siteData.hubsTitle}
                         </h2>
                         {loading ? (
@@ -106,10 +106,9 @@ function PublicSite() {
                 {selectedHub && (
                     <section
                         ref={detailsRef}
-                        className="sub-hub-animated-bg animate-fade-in"
+                        className="sub-hub-animated-bg animate-fade-in section-padding"
                         style={{
                             borderTop: '1px solid rgba(255,255,255,0.1)',
-                            padding: 'clamp(40px, 8vh, 80px) 0',
                             width: '100%',
                             minHeight: '100vh',
                             position: 'relative'
@@ -120,14 +119,8 @@ function PublicSite() {
                 )}
             </main>
 
-            <footer style={{
-                textAlign: 'center',
-                padding: '20px 0',
-                backgroundColor: '#2c3e50',
-                color: 'white',
-                marginTop: 'auto'
-            }}>
-                <p style={{ margin: 0 }}>{siteData.footer.text}</p>
+            <footer className="main-footer">
+                <p>{siteData.footer.text}</p>
             </footer>
         </div>
     );

@@ -4,9 +4,8 @@ function InnovationHubOverview({ data }) {
     if (!data) return null;
 
     return (
-        <section style={{
+        <section className="section-padding" style={{
             background: 'linear-gradient(to bottom, #0f172a, #020617)',
-            padding: 'clamp(60px, 10vh, 140px) 20px',
             textAlign: 'center',
             borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
             position: 'relative'
@@ -25,10 +24,7 @@ function InnovationHubOverview({ data }) {
                 </span>
                 <h2 className="animate-fade-in-up" style={{
                     color: 'white',
-                    fontSize: '1.75rem',
                     marginBottom: '24px',
-                    fontWeight: 'bold',
-                    letterSpacing: '0.02em'
                 }}>
                     {data.title}
                 </h2>
@@ -40,7 +36,6 @@ function InnovationHubOverview({ data }) {
                 }}></div>
                 <p className="animate-fade-in-up-delay" style={{
                     color: '#94a3b8',
-                    fontSize: '1.15rem',
                     lineHeight: '1.8',
                     margin: 0
                 }}>
