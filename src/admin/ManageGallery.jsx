@@ -100,166 +100,131 @@ function ManageGallery() {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
             {/* Upload Section */}
-            <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.02)', padding: '30px' }}>
-                <h3 style={{ margin: '0 0 20px 0', color: '#1e293b' }}>Upload New Photos</h3>
+            <div className="gallery-upload-container">
+                <div className="admin-card">
+                    <h3 className="admin-card-title" style={{ textAlign: 'center' }}>Upload New Photos</h3>
 
-                <div style={{
-                    padding: '40px',
-                    borderRadius: '12px',
-                    border: '2px dashed #e2e8f0',
-                    background: '#f8fafc',
-                    textAlign: 'center'
-                }}>
-                    <input
-                        type="file"
-                        id="gallery-upload"
-                        multiple
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        style={{ display: 'none' }}
-                    />
-                    <label
-                        htmlFor="gallery-upload"
-                        style={{
-                            padding: '12px 24px',
-                            background: 'white',
-                            border: '1px solid #e2e8f0',
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                            color: '#475569',
-                            fontWeight: '600',
-                            display: 'inline-block',
-                            transition: 'all 0.2s'
-                        }}
-                    >
-                        📁 Select Photos
-                    </label>
-                    <p style={{ marginTop: '12px', fontSize: '0.85rem', color: '#64748b' }}>
-                        Supports JPEG, PNG, WEBP. You can select multiple files.
-                    </p>
+                    <div className="upload-dropzone">
+                        <input
+                            type="file"
+                            id="gallery-upload"
+                            multiple
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                        />
+                        <label
+                            htmlFor="gallery-upload"
+                            style={{
+                                padding: '12px 24px',
+                                background: 'white',
+                                border: '1px solid #e2e8f0',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                color: '#475569',
+                                fontWeight: '600',
+                                display: 'inline-block',
+                                transition: 'all 0.2s',
+                                marginBottom: '10px'
+                            }}
+                        >
+                            📁 Select Photos
+                        </label>
+                        <p style={{ margin: '10px 0 0 0', fontSize: '0.875rem', color: '#64748b' }}>
+                            Supports JPEG, PNG, WEBP. You can select multiple files.
+                        </p>
 
-                    {previewUrls.length > 0 && (
-                        <div style={{ marginTop: '30px' }}>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center', marginBottom: '20px' }}>
-                                {previewUrls.map((url, index) => (
-                                    <div key={index} style={{ position: 'relative' }}>
-                                        <img
-                                            src={url}
-                                            alt="Preview"
-                                            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', border: '2px solid white', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}
-                                        />
-                                        <button
-                                            onClick={() => removePreview(index)}
-                                            style={{
-                                                position: 'absolute',
-                                                top: '-8px',
-                                                right: '-8px',
-                                                background: '#ef4444',
-                                                color: 'white',
-                                                border: 'none',
-                                                borderRadius: '50%',
-                                                width: '24px',
-                                                height: '24px',
-                                                cursor: 'pointer',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontSize: '12px',
-                                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                                            }}
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-                                ))}
+                        {previewUrls.length > 0 && (
+                            <div style={{ marginTop: '30px' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '24px' }}>
+                                    {previewUrls.map((url, index) => (
+                                        <div key={index} style={{ position: 'relative' }}>
+                                            <img
+                                                src={url}
+                                                alt="Preview"
+                                                style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '2px solid white', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
+                                            />
+                                            <button
+                                                onClick={() => removePreview(index)}
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '-8px',
+                                                    right: '-8px',
+                                                    background: '#ef4444',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '50%',
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '12px',
+                                                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                                                }}
+                                            >
+                                                ✕
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button
+                                    onClick={handleUpload}
+                                    disabled={uploading}
+                                    className="admin-logout-btn"
+                                    style={{
+                                        maxWidth: '200px',
+                                        margin: '0 auto',
+                                        background: 'var(--primary)',
+                                        borderRadius: '50px'
+                                    }}
+                                >
+                                    {uploading ? 'Uploading...' : `Upload ${selectedFiles.length} Photos`}
+                                </button>
                             </div>
-                            <button
-                                onClick={handleUpload}
-                                disabled={uploading}
-                                style={{
-                                    padding: '12px 30px',
-                                    background: '#2563eb',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '8px',
-                                    fontWeight: '700',
-                                    cursor: uploading ? 'not-allowed' : 'pointer',
-                                    opacity: uploading ? 0.7 : 1
-                                }}
-                            >
-                                {uploading ? 'Uploading...' : `Upload ${selectedFiles.length} Photos`}
-                            </button>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
 
             {/* Gallery Grid Section */}
-            <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.02)', padding: '30px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <h3 style={{ margin: 0, color: '#1e293b' }}>Gallery Photos ({images.length})</h3>
+            <div className="admin-card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                    <h3 className="admin-card-title" style={{ margin: 0 }}>Gallery Photos ({images.length})</h3>
                 </div>
 
                 {loading ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Loading gallery...</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>
+                        <div className="animate-pulse">Loading gallery...</div>
+                    </div>
                 ) : error ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#ef4444' }}>{error}</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#ef4444' }}>{error}</div>
                 ) : images.length === 0 ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Gallery is empty. Upload some memories!</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>Gallery is empty. Upload some memories!</div>
                 ) : (
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                        gap: '20px'
-                    }}>
+                    <div className="gallery-admin-grid">
                         {images.map((image) => (
-                            <div key={image._id} style={{
-                                position: 'relative',
-                                borderRadius: '12px',
-                                overflow: 'hidden',
-                                aspectRatio: '1/1',
-                                group: 'true'
-                            }}>
+                            <div key={image._id} className="gallery-admin-item">
                                 <img
                                     src={image.imageUrl}
                                     alt="Gallery"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        transition: 'transform 0.3s ease'
-                                    }}
                                 />
-                                <div style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    background: 'rgba(0,0,0,0.4)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    opacity: 0,
-                                    transition: 'opacity 0.2s',
-                                    cursor: 'default'
-                                }}
-                                    onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
-                                    onMouseLeave={(e) => e.currentTarget.style.opacity = 0}
-                                >
+                                <div className="gallery-admin-overlay">
                                     <button
                                         onClick={() => handleDelete(image._id)}
                                         style={{
-                                            padding: '8px 16px',
+                                            padding: '10px 20px',
                                             background: '#ef4444',
                                             color: 'white',
                                             border: 'none',
-                                            borderRadius: '6px',
-                                            fontWeight: '600',
+                                            borderRadius: '50px',
+                                            fontWeight: '700',
                                             cursor: 'pointer',
-                                            fontSize: '0.8rem'
+                                            fontSize: '0.875rem',
+                                            boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)'
                                         }}
                                     >
                                         Delete

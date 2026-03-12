@@ -15,7 +15,6 @@ const HUBS_LIST = [
     "Skill Aura"
 ];
 
-
 function EventForm({ isEdit = false }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -132,100 +131,97 @@ function EventForm({ isEdit = false }) {
     };
 
     return (
-        <div className="admin-form-container" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-            <h2 style={{ marginBottom: '24px', color: '#1e293b' }}>{isEdit ? 'Edit Event' : 'Add New Event'}</h2>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div className="admin-card" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <h2 className="admin-section-title">{isEdit ? 'Edit Event' : 'Create New Event'}</h2>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
                 {/* Event Title */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Event Title</label>
+                    <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Event Title</label>
                     <input
                         type="text"
                         name="title"
-                        placeholder="Enter Event Title"
+                        placeholder="e.g. Workshop on Web Development"
                         required
                         value={formData.title}
                         onChange={handleChange}
-                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd' }}
+                        className="admin-input"
+                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0', width: '100%', fontSize: '0.95rem' }}
                     />
                 </div>
 
                 {/* Description */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Description</label>
+                    <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Description</label>
                     <textarea
                         name="description"
                         rows="4"
-                        placeholder="Event details..."
+                        placeholder="Provide details about the event..."
                         required
                         value={formData.description}
                         onChange={handleChange}
-                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', resize: 'vertical' }}
+                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0', width: '100%', fontSize: '0.95rem', resize: 'vertical' }}
                     ></textarea>
                 </div>
 
-                {/* Hub Selection */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Hub Selection</label>
-                    <select
-                        name="hub"
-                        value={formData.hub}
-                        onChange={handleChange}
-                        required
-                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd', background: 'white' }}
-                    >
-                        <option value="">-- Choose a Hub --</option>
-                        {HUBS_LIST.map((hubName, idx) => (
-                            <option key={idx} value={hubName}>{hubName}</option>
-                        ))}
-                    </select>
-                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                    {/* Hub Selection */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Target Hub</label>
+                        <select
+                            name="hub"
+                            value={formData.hub}
+                            onChange={handleChange}
+                            required
+                            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0', background: 'white', fontSize: '0.95rem' }}
+                        >
+                            <option value="">Select Hub</option>
+                            {HUBS_LIST.map((hubName, idx) => (
+                                <option key={idx} value={hubName}>{hubName}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                {/* Event Date */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Event Date</label>
-                    <input
-                        type="date"
-                        name="date"
-                        required
-                        value={formData.date}
-                        onChange={handleChange}
-                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd' }}
-                    />
+                    {/* Event Date */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Event Date</label>
+                        <input
+                            type="date"
+                            name="date"
+                            required
+                            value={formData.date}
+                            onChange={handleChange}
+                            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0', width: '100%', fontSize: '0.95rem' }}
+                        />
+                    </div>
                 </div>
 
                 {/* Registration Link */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Event Registration Link</label>
+                    <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Registration URL (Optional)</label>
                     <input
                         type="url"
                         name="registerLink"
-                        placeholder="https://forms.google.com/..."
+                        placeholder="https://link-to-registration-form.com"
                         value={formData.registerLink}
                         onChange={handleChange}
-                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #ddd' }}
+                        style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0', width: '100%', fontSize: '0.95rem' }}
                     />
                 </div>
 
                 {/* Media Upload Section */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#444', fontWeight: 'bold' }}>Event Images (Max 3)</label>
-                    <div style={{
-                        padding: '24px',
-                        borderRadius: '8px',
-                        border: '2px dashed #ccc',
-                        background: '#fafafa',
-                        textAlign: 'center'
-                    }}>
+                    <label style={{ fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>Event Images (Max 3)</label>
+                    <div className="upload-dropzone" style={{ padding: '32px 20px' }}>
                         {/* Selected Previews */}
                         {previewUrls.length > 0 && (
-                            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '20px' }}>
+                            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '24px' }}>
                                 {previewUrls.map((url, index) => (
                                     <div key={index} style={{ position: 'relative' }}>
                                         <img
                                             src={url}
                                             alt={`Preview ${index}`}
-                                            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+                                            style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '2px solid white', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
                                         />
                                         <button
                                             type="button"
@@ -241,6 +237,9 @@ function EventForm({ isEdit = false }) {
                                                 width: '24px',
                                                 height: '24px',
                                                 cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
                                                 fontSize: '12px'
                                             }}
                                         >
@@ -251,86 +250,73 @@ function EventForm({ isEdit = false }) {
                             </div>
                         )}
 
-                        {imageFiles.length < 3 && (
-                            <div style={{ marginBottom: previewUrls.length > 0 ? '15px' : '0' }}>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={handleImageChange}
-                                    style={{ display: 'none' }}
-                                    id="event-image-upload"
-                                />
-                                <label
-                                    htmlFor="event-image-upload"
-                                    style={{
-                                        padding: '10px 20px',
-                                        background: 'white',
-                                        border: '1px solid #ddd',
-                                        borderRadius: '8px',
-                                        cursor: 'pointer',
-                                        color: '#666'
-                                    }}
-                                >
-                                    {previewUrls.length > 0 ? 'Add More Images' : 'Select Images'}
-                                </label>
-                            </div>
-                        )}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                            {imageFiles.length < 3 && (
+                                <>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={handleImageChange}
+                                        style={{ display: 'none' }}
+                                        id="event-image-upload"
+                                    />
+                                    <label
+                                        htmlFor="event-image-upload"
+                                        className="admin-logout-btn"
+                                        style={{ background: 'white', color: '#475569', border: '1px solid #e2e8f0', width: 'auto', padding: '10px 20px', fontSize: '0.875rem' }}
+                                    >
+                                        📁 {previewUrls.length > 0 ? 'Add More Images' : 'Select Images'}
+                                    </label>
+                                </>
+                            )}
 
-                        {imageFiles.length > 0 && uploadedImageUrls.length === 0 && (
-                            <div style={{ marginTop: '10px' }}>
+                            {imageFiles.length > 0 && uploadedImageUrls.length === 0 && (
                                 <button
                                     type="button"
                                     onClick={handleImageUpload}
                                     disabled={isUploading}
-                                    style={{
-                                        padding: '10px 25px',
-                                        background: '#2563eb',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '8px',
-                                        cursor: isUploading ? 'not-allowed' : 'pointer',
-                                        fontWeight: 'bold'
-                                    }}
+                                    className="admin-logout-btn"
+                                    style={{ background: 'var(--primary)', width: 'auto', padding: '10px 24px', fontSize: '0.875rem' }}
                                 >
                                     {isUploading ? 'Uploading...' : `Confirm Upload (${imageFiles.length} files)`}
                                 </button>
-                            </div>
-                        )}
+                            )}
 
-                        {uploadedImageUrls.length > 0 && (
-                            <p style={{ color: '#16a34a', fontWeight: 'bold', margin: '10px 0 0 0' }}>✅ {uploadedImageUrls.length} Images Ready</p>
-                        )}
+                            {uploadedImageUrls.length > 0 && (
+                                <p style={{ color: '#16a34a', fontWeight: '700', margin: 0, fontSize: '0.875rem' }}>✅ {uploadedImageUrls.length} Images Ready for Publication</p>
+                            )}
 
-                        {imageFiles.length === 0 && (
-                            <p style={{ fontSize: '0.85rem', color: '#888', marginTop: '10px' }}>No image? A default placeholder will be used.</p>
-                        )}
+                            {imageFiles.length === 0 && (
+                                <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>No images? A default event placeholder will be used.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
 
                 {/* Buttons */}
-                <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
+                <div style={{ display: 'flex', gap: '16px', marginTop: '12px' }}>
                     <button
                         type="submit"
                         disabled={loading || (imageFiles.length > 0 && uploadedImageUrls.length === 0)}
-                        className="admin-btn"
+                        className="admin-logout-btn"
                         style={{
                             flex: 1,
-                            background: (loading || (imageFiles.length > 0 && uploadedImageUrls.length === 0)) ? '#ccc' : '#0a0a0a',
-                            color: 'white',
-                            border: 'none',
+                            background: (loading || (imageFiles.length > 0 && uploadedImageUrls.length === 0)) ? '#cbd5e1' : '#0f172a',
                         }}
                     >
-                        {loading ? 'Processing...' : 'Publish Event'}
+                        {loading ? 'Processing...' : (isEdit ? 'Update Event' : 'Publish Event')}
                     </button>
 
                     <button
                         type="button"
                         onClick={() => navigate('/admin/manage-events')}
-                        className="admin-btn"
+                        className="admin-logout-btn"
                         style={{
-                            background: '#eee',
-                            border: 'none',
+                            background: 'white',
+                            color: '#475569',
+                            border: '1px solid #e2e8f0',
+                            flex: 0.5
                         }}
                     >
                         Cancel

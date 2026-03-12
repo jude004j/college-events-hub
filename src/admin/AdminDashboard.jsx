@@ -43,17 +43,9 @@ function AdminDashboard() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
             {/* Stats Cards */}
-            <div className="admin-stats-grid">
+            <div className="admin-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
                 {stats.map((stat, idx) => (
-                    <div key={idx} style={{
-                        padding: '24px',
-                        background: 'white',
-                        borderRadius: '16px',
-                        boxShadow: '0 4px 15px rgba(0,0,0,0.02)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '20px'
-                    }}>
+                    <div key={idx} className="admin-card" style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '24px' }}>
                         <div style={{
                             width: '56px',
                             height: '56px',
@@ -68,49 +60,51 @@ function AdminDashboard() {
                             {stat.icon}
                         </div>
                         <div>
-                            <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>{stat.label}</p>
-                            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a', fontWeight: '700' }}>{stat.value}</h3>
+                            <p style={{ margin: 0, fontSize: '0.875rem', color: '#64748b', fontWeight: '500' }}>{stat.label}</p>
+                            <h3 style={{ margin: 0, fontSize: '1.75rem', color: '#0f172a', fontWeight: '700', letterSpacing: '-0.025em' }}>{stat.value}</h3>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Recent Activity Table */}
-            <div className="admin-table-container">
+            <div className="admin-card" style={{ padding: 0, overflow: 'hidden' }}>
                 <div style={{
-                    padding: '20px 24px',
+                    padding: '24px',
                     borderBottom: '1px solid #f1f5f9',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
                 }}>
-                    <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#1e293b' }}>Recently Added Events</h3>
-                    <NavLink to="/admin/manage-events" style={{ fontSize: '0.9rem', color: '#2563eb', textDecoration: 'none', fontWeight: '600' }}>View All</NavLink>
+                    <h3 className="admin-card-title" style={{ margin: 0 }}>Recently Added Events</h3>
+                    <NavLink to="/admin/manage-events" style={{ fontSize: '0.875rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: '600' }}>View All</NavLink>
                 </div>
                 <div>
                     {loading ? (
-                        <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Loading...</div>
+                        <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>
+                            <div className="animate-pulse">Loading dashboard data...</div>
+                        </div>
                     ) : recentEvents.length === 0 ? (
-                        <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>No recent events.</div>
+                        <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>No recent events.</div>
                     ) : (
                         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                             <thead style={{ background: '#f8fafc' }}>
                                 <tr>
-                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>ID</th>
-                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>EVENT TITLE</th>
-                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>HUB NAME</th>
-                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>EVENT DATE</th>
-                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>STATUS</th>
+                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>ID</th>
+                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Event Title</th>
+                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hub Name</th>
+                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Event Date</th>
+                                    <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {recentEvents.map((event) => (
-                                    <tr key={event._id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                                        <td style={{ padding: '16px 24px', fontSize: '0.95rem', color: '#64748b' }}>#{event._id.substring(event._id.length - 6)}</td>
-                                        <td style={{ padding: '16px 24px', fontSize: '0.95rem', color: '#1e293b', fontWeight: '600' }}>{event.title}</td>
-                                        <td style={{ padding: '16px 24px', fontSize: '0.95rem', color: '#475569' }}>{event.hubId?.name || 'N/A'}</td>
-                                        <td style={{ padding: '16px 24px', fontSize: '0.95rem', color: '#475569' }}>{new Date(event.date).toLocaleDateString()}</td>
-                                        <td style={{ padding: '16px 24px', fontSize: '0.95rem' }}>
+                                    <tr key={event._id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }}>
+                                        <td style={{ padding: '20px 24px', fontSize: '0.875rem', color: '#94a3b8', fontFamily: 'monospace' }}>#{event._id.substring(event._id.length - 6)}</td>
+                                        <td style={{ padding: '20px 24px', fontSize: '0.95rem', color: '#1e293b', fontWeight: '600' }}>{event.title}</td>
+                                        <td style={{ padding: '20px 24px', fontSize: '0.875rem', color: '#475569' }}>{event.hubId?.name || 'N/A'}</td>
+                                        <td style={{ padding: '20px 24px', fontSize: '0.875rem', color: '#475569' }}>{new Date(event.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</td>
+                                        <td style={{ padding: '20px 24px', fontSize: '0.95rem' }}>
                                             <span style={{
                                                 padding: '4px 12px',
                                                 borderRadius: '50px',

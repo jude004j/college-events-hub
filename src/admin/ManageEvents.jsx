@@ -51,9 +51,9 @@ function ManageEvents() {
     };
 
     return (
-        <div style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.02)', overflow: 'hidden' }}>
+        <div className="admin-card" style={{ padding: 0, overflow: 'hidden' }}>
             <div style={{
-                padding: '20px 24px',
+                padding: '24px',
                 borderBottom: '1px solid #f1f5f9',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -61,52 +61,56 @@ function ManageEvents() {
                 flexWrap: 'wrap',
                 gap: '15px'
             }}>
-                <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#1e293b' }}>Total Events ({events.length})</h3>
+                <h3 className="admin-card-title" style={{ margin: 0 }}>Total Events ({events.length})</h3>
                 <NavLink
                     to="/admin/add-event"
-                    className="admin-btn admin-btn-primary"
-                    style={{ textDecoration: 'none' }}
+                    className="admin-logout-btn"
+                    style={{ textDecoration: 'none', background: 'var(--primary)', width: 'auto', padding: '10px 20px' }}
                 >
-                    <span>➕</span> Add New Event
+                    <span>➕ Add New Event</span>
                 </NavLink>
             </div>
 
             <div className="admin-table-container">
                 {loading ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Loading events...</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>
+                        <div className="animate-pulse">Loading events...</div>
+                    </div>
                 ) : error ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#ef4444' }}>{error}</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#ef4444' }}>{error}</div>
                 ) : events.length === 0 ? (
-                    <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>No events found. Create one to get started!</div>
+                    <div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>No events found. Create one to get started!</div>
                 ) : (
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                         <thead style={{ background: '#f8fafc' }}>
                             <tr>
-                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>EVENT TITLE</th>
-                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>HUB NAME</th>
-                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>EVENT DATE</th>
-                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.85rem' }}>ACTIONS</th>
+                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Event Title</th>
+                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hub Name</th>
+                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Event Date</th>
+                                <th style={{ padding: '16px 24px', color: '#64748b', fontWeight: '600', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {events.map((event) => (
-                                <tr key={event._id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.background = '#fcfcfc'} onMouseLeave={(e) => e.currentTarget.style.background = 'white'}>
+                                <tr key={event._id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                                     <td style={{ padding: '20px 24px' }}>
-                                        <div style={{ fontWeight: '600', color: '#1e293b', marginBottom: '4px' }}>{event.title}</div>
+                                        <div style={{ fontWeight: '600', color: '#0f172a', marginBottom: '4px' }}>{event.title}</div>
                                         <div style={{ fontSize: '0.8rem', color: '#64748b', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{event.description}</div>
                                     </td>
-                                    <td style={{ padding: '20px 24px', fontSize: '0.95rem', color: '#475569' }}>{event.hubId?.name || 'N/A'}</td>
-                                    <td style={{ padding: '20px 24px', fontSize: '0.95rem', color: '#475569' }}>{new Date(event.date).toLocaleDateString()}</td>
+                                    <td style={{ padding: '20px 24px', fontSize: '0.875rem', color: '#475569' }}>{event.hubId?.name || 'N/A'}</td>
+                                    <td style={{ padding: '20px 24px', fontSize: '0.875rem', color: '#475569' }}>{new Date(event.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</td>
                                     <td style={{ padding: '20px 24px' }}>
-                                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                                        <div style={{ display: 'flex', gap: '8px' }}>
                                             <button
-                                                className="admin-btn admin-btn-secondary"
+                                                className="admin-logout-btn"
+                                                style={{ background: '#f1f5f9', color: '#475569', padding: '6px 12px', fontSize: '0.8rem', width: 'auto' }}
                                                 onClick={() => navigate(`/admin/edit-event/${event._id}`)}
                                             >
                                                 Edit
                                             </button>
                                             <button
-                                                className="admin-btn admin-btn-danger"
+                                                className="admin-logout-btn"
+                                                style={{ padding: '6px 12px', fontSize: '0.8rem', width: 'auto' }}
                                                 onClick={() => handleDelete(event._id)}
                                             >
                                                 Delete
