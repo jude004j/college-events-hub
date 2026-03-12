@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 function Gallery() {
     const [images, setImages] = useState([]);
@@ -9,7 +10,7 @@ function Gallery() {
     useEffect(() => {
         const fetchGallery = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/gallery');
+                const response = await fetch(`${API_BASE_URL}/api/gallery`);
                 if (response.ok) {
                     const data = await response.json();
                     setImages(data.slice(0, 3)); // Only take top 3

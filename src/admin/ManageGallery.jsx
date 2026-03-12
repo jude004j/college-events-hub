@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 
 function ManageGallery() {
     const [images, setImages] = useState([]);
@@ -14,7 +15,7 @@ function ManageGallery() {
 
     const fetchGallery = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/gallery');
+            const response = await fetch(`${API_BASE_URL}/api/gallery`);
             if (response.ok) {
                 const data = await response.json();
                 setImages(data);
@@ -52,7 +53,7 @@ function ManageGallery() {
         });
 
         try {
-            const response = await fetch('http://localhost:5000/api/gallery', {
+            const response = await fetch(`${API_BASE_URL}/api/gallery`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -81,7 +82,7 @@ function ManageGallery() {
 
         const token = localStorage.getItem('adminToken');
         try {
-            const response = await fetch(`http://localhost:5000/api/gallery/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/gallery/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

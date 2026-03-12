@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { siteData } from '../data/dummyData';
+import API_BASE_URL from '../config/api';
 
 function GalleryPage() {
     const [images, setImages] = useState([]);
@@ -11,7 +12,7 @@ function GalleryPage() {
     useEffect(() => {
         const fetchGallery = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/gallery');
+                const response = await fetch(`${API_BASE_URL}/api/gallery`);
                 if (response.ok) {
                     const data = await response.json();
                     setImages(data);

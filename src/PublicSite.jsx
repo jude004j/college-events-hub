@@ -6,6 +6,7 @@ import HubDetails from './components/HubDetails';
 import InnovationHubOverview from './components/InnovationHubOverview';
 import Gallery from './components/Gallery';
 import MascotCTA from './components/MascotCTA';
+import API_BASE_URL from './config/api';
 import { siteData } from './data/dummyData';
 
 function PublicSite() {
@@ -21,8 +22,8 @@ function PublicSite() {
     const fetchHubsAndEvents = async () => {
         try {
             const [hubsRes, eventsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/hubs'),
-                fetch('http://localhost:5000/api/events')
+                fetch(`${API_BASE_URL}/api/hubs`),
+                fetch(`${API_BASE_URL}/api/events`)
             ]);
 
             if (hubsRes.ok && eventsRes.ok) {

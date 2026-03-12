@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 function AdminDashboard() {
     const [events, setEvents] = useState([]);
@@ -13,8 +14,8 @@ function AdminDashboard() {
     const fetchDashboardData = async () => {
         try {
             const [eventsRes, hubsRes] = await Promise.all([
-                fetch('http://localhost:5000/api/events'),
-                fetch('http://localhost:5000/api/hubs')
+                fetch(`${API_BASE_URL}/api/events`),
+                fetch(`${API_BASE_URL}/api/hubs`)
             ]);
 
             if (eventsRes.ok && hubsRes.ok) {
