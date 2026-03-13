@@ -160,14 +160,14 @@ p { font-size: clamp(14px, 2vw, 18px); word-wrap: break-word; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 8px 15px;
   background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  min-height: 70px;
+  min-height: 60px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 @media (min-width: 768px) {
-  .header-container { padding: 10px 30px; min-height: 80px; }
+  .header-container { padding: 8px 30px; min-height: 70px; }
 }
 
 .header-logo-box {
@@ -185,11 +185,29 @@ p { font-size: clamp(14px, 2vw, 18px); word-wrap: break-word; }
 
 .header-title-text {
   text-align: center;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.header-title-text h1 {
   color: white;
   text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  margin: 0 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .header-title-text h1 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-title-text h1 {
+    font-size: 1rem;
+  }
 }
 
 /* Hero Section */
